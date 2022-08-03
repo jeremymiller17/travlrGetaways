@@ -4,9 +4,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const hbs = require("hbs");
-
-//Loads mongoose database schema
-require("./app_api/database/db")
+require("./app_api/database/db");
 
 var indexRouter = require("./app_server/routes/index");
 var usersRouter = require("./app_server/routes/users");
@@ -33,6 +31,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+// Allow CORS
+app.use("/api", (req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "http://localhost:4200");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  next();
+});
+
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/travel", travelRouter);
@@ -42,8 +51,7 @@ app.use("/meals", mealsRouter);
 app.use("/contact", contactRouter);
 app.use("/about", aboutRouter);
 
-//API router
-app.use('/api', apiRouter);
+app.use("/api", apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
