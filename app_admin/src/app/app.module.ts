@@ -1,7 +1,8 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { HttpModule } from "@angular/http";
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule,ReactiveFormsModule } from "@angular/forms";
+
 
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-router.module";
@@ -31,7 +32,8 @@ import { LoginComponent } from './login/login.component';
   ],
   imports: [
     BrowserModule, 
-    HttpModule, 
+    HttpModule,
+    FormsModule, 
     ReactiveFormsModule, 
     AppRoutingModule],
   providers: [
